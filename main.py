@@ -44,7 +44,17 @@ TEXT_MODEL = "openai-community/roberta-large-openai-detector"
 IMAGE_MODEL = "aaronespasa/deepfake-detection-resnetinceptionv1"
 AUDIO_MODEL = "facebook/wav2vec2-base"
 
-FACE_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+# Force an absolute string path lookup for the XML file
+HAAR_CACHE_DIR = str(cv2.data.haarcascades)
+cascade_path = os.path.join(HAAR_CACHE_DIR, "haarcascade_frontalface_default.xml")
+
+# Safely initialize the classifier
+FACE_CASCADE = cv2.CascadeClassifier(cascade_path)
+
+# Verification check to catch issues immediately at boot rather than runtime
+if FACE_CASCADE.empty():
+    raise RuntimeError(f"Failed to load Haar Cascade XML from path: {cascade_path}")
+
 
 
 class DetectionResult(BaseModel):
