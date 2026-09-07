@@ -35,7 +35,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI(title="Deepfake Detector API (Render + HF Inference API proxy)")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 HF_API_TOKEN = os.environ.get("HF_API_TOKEN", "")
 HF_HEADERS = {"Authorization": f"Bearer {HF_API_TOKEN}"}
