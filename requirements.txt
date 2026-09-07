@@ -1,7 +1,7 @@
 fastapi>=0.110
 uvicorn[standard]>=0.29
 python-multipart>=0.0.9
-opencv-python>=4.9.0.80
+opencv-python-headless==4.9.0.80
 numpy>=1.26
 requests>=2.31
 pydantic>=2.6
