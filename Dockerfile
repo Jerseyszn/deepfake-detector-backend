@@ -1,7 +1,5 @@
 FROM python:3.10-slim
 
-FROM python:3.10-slim
-
 # Fixed: Removed the broken libgl1-mesa-glx package and kept the clean dependencies
 RUN apt-get update && apt-get install -y \
     ffmpeg \
