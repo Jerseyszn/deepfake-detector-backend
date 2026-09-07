@@ -22,4 +22,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py .
 
 # Render sets $PORT itself — the app must bind to it, not a hardcoded port.
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-10000}
+# Dynamic environment routing wrapper
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+
